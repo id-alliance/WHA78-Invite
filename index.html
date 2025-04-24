@@ -692,13 +692,26 @@
 <script>
   window.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
-      if (confirm("Would you like to email this invitation to others?")) {
-        window.location.href = `mailto:?subject=You're invited to WHA78!&body=Check out this invitation: https://id-alliance.github.io/WHA78-Invite/`;
+      if (confirm("Would you like to copy the full invitation content to your clipboard?\nYou can then paste it directly into your email.")) {
+        // Get the full page content (you can change this to just a specific section if needed)
+        const content = document.documentElement.innerHTML;
+
+        // Create a temporary text area
+        const temp = document.createElement('textarea');
+        temp.value = content;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+
+        alert("Invitation content copied! You can now paste it into your email.");
       }
     }, 1000);
   });
 </script>
 
+
+	
 </body>
 
 </html>
