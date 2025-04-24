@@ -691,24 +691,29 @@
 	</table><!-- End -->
 <script>
   window.addEventListener('DOMContentLoaded', function () {
+    // Optional delay (1000ms = 1 second)
     setTimeout(function () {
-      if (confirm("Would you like to copy the full invitation content to your clipboard?\nYou can then paste it directly into your email.")) {
-        // Get the full page content (you can change this to just a specific section if needed)
-        const content = document.documentElement.innerHTML;
+      if (confirm("Would you like to copy the invitation content to your clipboard?\nYou can then paste it directly into your email.")) {
 
-        // Create a temporary text area
-        const temp = document.createElement('textarea');
-        temp.value = content;
-        document.body.appendChild(temp);
-        temp.select();
-        document.execCommand('copy');
-        document.body.removeChild(temp);
+        // --- SELECT VISIBLE TEXT FROM THE ENTIRE PAGE BODY ---
+        // Note: This copies *all* text, potentially including headers/footers.
+        const contentToCopy = document.body.innerText;
 
-        alert("Invitation content copied! You can now paste it into your email.");
+        // --- USE MODERN CLIPBOARD API ---
+        navigator.clipboard.writeText(contentToCopy).then(function() {
+          // Success feedback
+          alert("Invitation content copied! You can now paste it into your email.");
+        }).catch(function(err) {
+          // Error feedback
+          console.error('Failed to copy text: ', err);
+          alert("Sorry, couldn't copy the text automatically. You might need to select and copy it manually.");
+        });
       }
-    }, 1000);
-  });
+    }, 1000); // End of setTimeout
+  }); // End of DOMContentLoaded listener
 </script>
+
+</body>
 
 
 	
