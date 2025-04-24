@@ -689,6 +689,16 @@
 			</tr>
 		</tbody>
 	</table><!-- End -->
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    setTimeout(function () {
+      if (confirm("Would you like to email this invitation to others?")) {
+        window.location.href = `mailto:?subject=You're invited to WHA78!&body=Check out this invitation: https://id-alliance.github.io/WHA78-Invite/`;
+      }
+    }, 1000);
+  });
+</script>
+
 </body>
 
 </html>
